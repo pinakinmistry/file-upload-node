@@ -1,0 +1,14 @@
+{
+  "name": "file-upload-node",
+  "version": "1.0.0",
+  "description": "file uploaded",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pinakinmistry",
+  "license": "ISC",
+  "dependencies": {
+    "multer": "^1.1.0"
+  }
+}

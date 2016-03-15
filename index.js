@@ -7,8 +7,9 @@ var path = require('path');
 var exec = require( 'child_process' ).exec;
 var port = 4000;
 
-app.use(express.static('client'));
+app.use(express.static(__dirname + '/client'));
 app.use(morgan('dev'));
+app.use(express.static(__dirname + '/public'));
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -46,11 +47,11 @@ app.get('/home', function (req, res) {
 });
 
 //wipe out all files from this location at regular interval
-setInterval(function () {
-	exec( 'rm -rf ' + './public/uploads/*', function ( err, stdout, stderr ){
-	  console.log('Files deleted');
-	});
-}, 10 * 1000);
+// setInterval(function () {
+// 	exec( 'rm -rf ' + './public/uploads/*', function ( err, stdout, stderr ){
+// 	  console.log('Files deleted');
+// 	});
+// }, 60 * 1000);
 
 app.listen(port, function () {
 	console.log('Listening on port', port);

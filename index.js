@@ -3,6 +3,7 @@ var fs = require('fs');
 var app = express();
 var multer = require('multer');
 var morgan = require('morgan');
+var exec = require( 'child_process' ).exec;
 var port = 4000;
 
 app.use(express.static('client'));
@@ -38,10 +39,10 @@ app.post('/pictures/upload', upload.single('image'), function (req, res) {
 
 //wipe out all files from this location at regular interval
 setInterval(function () {
-	fs.rmdir('./public/uploads', function () {
-		console.log('All files deleted successfully');
+	exec( 'rm -rf ' + './public/uploads/*', function ( err, stdout, stderr ){
+	  console.log('Files deleted');
 	});
-}, 5 * 1000);
+}, 8 * 1000);
 
 app.listen(port, function () {
 	console.log('Listening on port', port);

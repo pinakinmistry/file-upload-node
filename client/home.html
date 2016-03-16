@@ -18,14 +18,31 @@
 		}
 
 		ul[rn-carousel] {
-			height: 450px;
-    	padding-top: 71px;
+			height: 468px;
+    	padding-top: 70px;
 		}
 
 		.layer {
+			padding-left: 10px;
+			padding-top: 10px;
 			background-size: 100% 100%;
   		background-repeat: no-repeat;
   		height: 500px;
+		}
+
+		.layer .winner-name-holder {
+			display: inline-block;
+			padding: 4px 10px;
+			font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+			background: red;
+			border-radius: 10px;
+			opacity: 0.8;
+		}
+
+		.layer .winner-name {
+			color: #fff;
+			opacity: 1;
+			font-size: 20px;
 		}
 	</style>
 	
@@ -34,39 +51,24 @@
 	<script src="bower_components/angular-carousel/dist/angular-carousel.min.js"></script>
 	<script>
 		angular.module('MyApp', ['angular-carousel']);
-		function CarouselDemoCtrl($scope){
-		  $scope.sportImages = [
-		    {
-		      image: 'winners/1.jpeg'
-		    },
-		    {
-		      image: 'winners/7.jpeg'
-		    },
-		    {
-		      image: 'winners/3.jpeg'
-		    },
-		    {
-		      image: 'winners/4.jpeg'
-		    },
-		    {
-		      image: 'winners/5.jpeg'
-		    },
-		    {
-		      image: 'winners/6.jpeg'
-		    },
-		    {
-		      image: 'winners/2.jpeg'
-		    }
-		  ];
+		function CarouselDemoCtrl($scope, $http){
+		  $http.get('/winners').then(function (res) {
+		  	$scope.images = res.data;
+		  });
 		}
 	</script>
 </head>
 <body>
 	<div class="wrapper">
 		<div ng-app="MyApp" ng-controller="CarouselDemoCtrl">
-  		<ul rn-carousel class="image" rn-carousel-auto-slide>
-			  <li ng-repeat="image in sportImages">
-			    <div class="layer" ng-style="{'background-image': 'url({{image.image}})'}">
+  		<ul ng-if="images" rn-carousel class="image" rn-carousel-auto-slide
+  			rn-carousel-transition="slide" rn-carousel-controls
+  			rn-carousel-duration="1000">
+			  <li ng-repeat="image in images">
+			    <div class="layer" ng-style="{'background-image': 'url({{image.url}})'}">
+			    	<span class="winner-name-holder">
+			    		<span class="winner-name">{{image.name}}</span>
+			    	</span>
 			    </div>
 			  </li>
 			</ul>

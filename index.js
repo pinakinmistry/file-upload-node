@@ -22,7 +22,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({
   storage: storage,
-  limits: {fileSize: 1000000, files:1}
+  limits: {fileSize: 1000000, files: 5}
 });
 
 app.get('/upload/spijefie', function (req, res) {
@@ -34,7 +34,7 @@ app.get('/upload/spijefie', function (req, res) {
 });
 
 //handle posts on file uploads
-app.post('/pictures/upload', upload.single('image'), function (req, res) {
+app.post('/pictures/upload', upload.array('image', 12), function (req, res) {
 	res.send();
 });
 
@@ -52,6 +52,27 @@ app.get('/home', function (req, res) {
 // 	  console.log('Files deleted');
 // 	});
 // }, 60 * 1000);
+
+function getWinners(dir, files_){
+    files_ = files_ || [];
+    var files = fs.readdirSync(dir);
+    for (var i in files){
+        var name = files[i];
+        if ((/\.(png|jpe?g)$/i).test(name)){
+        		var winnerName = name.split(/\.(png|jpe?g)$/i)[0].split(/[_|\s|-]/);
+            files_.push({
+            	url: 'winners/' + name,
+            	name: winnerName[0] + ' ' + (winnerName[1] || '')
+            });
+        }
+    }
+    return files_;
+}
+
+//console.log(getFiles('public/winners'))
+app.get('/winners', function (req, res) {
+	res.json(getWinners('public/winners'));
+});
 
 app.listen(port, function () {
 	console.log('Listening on port', port);

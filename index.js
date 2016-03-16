@@ -46,13 +46,6 @@ app.get('/home', function (req, res) {
 	});
 });
 
-//wipe out all files from this location at regular interval
-// setInterval(function () {
-// 	exec( 'rm -rf ' + './public/uploads/*', function ( err, stdout, stderr ){
-// 	  console.log('Files deleted');
-// 	});
-// }, 60 * 1000);
-
 function getWinners(dir, files_){
     files_ = files_ || [];
     var files = fs.readdirSync(dir);
@@ -73,6 +66,13 @@ function getWinners(dir, files_){
 app.get('/winners', function (req, res) {
 	res.json(getWinners('public/winners'));
 });
+
+//wipe out all files from this location at regular interval
+// setInterval(function () {
+// 	exec( 'rm -rf ' + './public/uploads/*', function ( err, stdout, stderr ){
+// 	  console.log('Files deleted');
+// 	});
+// }, 5 * 1000);
 
 app.listen(port, function () {
 	console.log('Listening on port', port);

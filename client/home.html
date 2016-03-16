@@ -18,6 +18,7 @@
 		}
 
 		ul[rn-carousel] {
+			margin: 0;
 			height: 468px;
     	padding-top: 70px;
 		}
@@ -44,6 +45,27 @@
 			opacity: 1;
 			font-size: 20px;
 		}
+
+		.input-section {
+			height: 142px;
+	    width: 814px;
+	    position: relative;
+	    margin-left: 104px;
+	    margin-top: 289px;
+			background-image: url('inputs.jpg');
+			background-size: 100% 100%;
+			opacity: 0.7;	
+		}
+
+		.input-section:hover {
+			opacity: 1;	
+		}
+
+		.rn-carousel-controls {
+			position: relative;
+			top: -285px;
+	    color: #fff;
+		}
 	</style>
 	
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
@@ -63,7 +85,7 @@
 		<div ng-app="MyApp" ng-controller="CarouselDemoCtrl">
   		<ul ng-if="images" rn-carousel class="image" rn-carousel-auto-slide
   			rn-carousel-transition="slide" rn-carousel-controls
-  			rn-carousel-duration="1000">
+  			rn-carousel-duration="300">
 			  <li ng-repeat="image in images">
 			    <div class="layer" ng-style="{'background-image': 'url({{image.url}})'}">
 			    	<span class="winner-name-holder">
@@ -71,6 +93,8 @@
 			    	</span>
 			    </div>
 			  </li>
+			  <div class="input-section">
+			  </div>
 			</ul>
 		</div>
 	</div>

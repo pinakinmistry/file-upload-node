@@ -5,7 +5,7 @@ var multer = require('multer');
 var morgan = require('morgan');
 var path = require('path');
 var exec = require( 'child_process' ).exec;
-var port = 4000;
+var port = process.env.PORT || 4000;
 
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/client'));

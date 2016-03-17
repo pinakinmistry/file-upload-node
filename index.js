@@ -13,7 +13,7 @@ app.use(express.static(__dirname + '/public'));
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/uploads/');
+    cb(null, './public/winners/');
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);

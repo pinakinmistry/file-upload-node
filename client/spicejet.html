@@ -11,6 +11,22 @@
         .home_flight_search:hover {
             opacity: 1;
         }
+
+        #selfie-1 {
+            position: absolute;
+            width: 242px;
+            height: 278px;
+            border: 1px solid #fff;
+            z-index: 100;
+            background: #fff;
+            transform: rotateZ(11deg);
+            left: 529px;
+            top: 25px;
+        }
+
+        .nivoSlider img {
+            z-index: 10;
+        }
     </style>
      <!--Content placeholder to add the meta tags specific to page-->
     
@@ -25,6 +41,17 @@
     <meta name="apple-mobile-  web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
 <link id="ctl00_Link1" rel="shortcut icon" href="http://www.spicejet.com/images/favicon9.ico" type="image/x-icon">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('SJApp', []);
+        function CarouselCtrl($scope, $http){
+            console.log('fetching winners')
+          $http.get('/winners').then(function (res) {
+            $scope.images = res.data;
+            console.log($scope.images)
+          });
+        }
+    </script>
     <iframe src="./assets/analyze.html" scrolling="no" width="1" height="1" style="display: none;"></iframe><script type="text/javascript" src="./assets/cookieCallback.php" async=""></script><script async="" src="./assets/analytics.js"></script><script async="" src="./assets/gtm.js"></script><script type="text/javascript" async="" src="./assets/"></script><script type="text/javascript" async="" src="./assets/pixel.php"></script><script src="./assets/satelliteLib-c96710ce4608d772608b5bba12b2203ce37269ef.js"></script>
     <!--CSS starts here-->
     <link href="./assets/StandardV1.11.min.css" rel="stylesheet" type="text/css"><link href="./assets/ResponsiveStylesV1.5.min.css" rel="stylesheet" type="text/css">
@@ -77,8 +104,9 @@
         })();
 
     </script>
+
      <script type="text/javascript" async="" src="./assets/js15_as.js"></script><script type="text/javascript" src="./assets/adw.js"></script><script type="text/javascript" src="./assets/g.js"></script><script src="./assets/s-code-contents-e9c704920005f46e3e12e191a53a2cff4dc2d434.js"></script></head>
-<body>
+<body ng-app="SJApp">
      <noscript>
       &lt;iframe src="//www.googletagmanager.com/ns.html?id=GTM-NS5W5Z" height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;
     </noscript>
@@ -1138,7 +1166,7 @@ function __doPostBack(eventTarget, eventArgument) {
 
 
 
-            <div class="slider-wrapper theme-default">
+            <div class="slider-wrapper theme-default" ng-controller="CarouselCtrl">
 
                 <div id="slider" class="nivoSlider">
 
@@ -1149,15 +1177,24 @@ function __doPostBack(eventTarget, eventArgument) {
                         <img src="winners/club-selfie.jpg" alt="" data-transition="fade" style="width: 1000px; visibility: hidden;"></a>
 
                     <a href="#" class="nivo-imageLink" style="display: none;">
-                        <img src="winners/Lionel_Messi.jpg" alt="" data-transition="fade" style="width: 1000px; visibility: hidden;"></a>
+                        <img ng-src="{{images[0].url}}" alt="" data-transition="fade" style="width: 1000px; visibility: hidden;"></a>
 
+                    <a href="#" class="nivo-imageLink" style="display: none;">
+                        <img ng-src="{{images[1].url}}" alt="" data-transition="fade" style="width: 1000px; visibility: hidden;"></a>
+
+                    <!-- <a href="#" class="nivo-imageLink" style="display: none;">
+                        <img src="winners/club-selfie.jpg" alt="" data-transition="fade" style="width: 1000px; visibility: hidden;"></a>
+
+                    <a href="#" class="nivo-imageLink" style="display: none;">
+                        <img src="winners/Lionel_Messi.jpg" alt="" data-transition="fade" style="width: 1000px; visibility: hidden;"></a>
+ 
                     <a href="#" class="nivo-imageLink" style="display: none;">
                         <img src="winners/Ria-Larson.jpg" alt="" data-transition="fade" style="width: 1000px; visibility: hidden;"></a>
 
 
                     <a href="#" class="nivo-imageLink" style="display: none;">
                         <img src="winners/Flora_Simpson.jpg" alt="" data-transition="fade" style="width: 1000px; visibility: hidden;"></a>
-
+ -->
 
                         <img src="./assets/BrandTrust-banners.jpg" alt="" data-transition="fade" style="width: 1000px; visibility: hidden;">
 

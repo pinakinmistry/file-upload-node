@@ -13,7 +13,7 @@ app.use(express.static(__dirname + '/public'));
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/winners/');
+    cb(null, './public/uploads/');
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -34,7 +34,7 @@ app.get('/upload/spijefie', function (req, res) {
 });
 
 app.post('/pictures/upload', upload.array('image', 12), function (req, res) {
-	res.send();
+	res.send('Image(s) uploaded successfully');
 });
 
 app.get('/home', function (req, res) {

@@ -53,6 +53,14 @@ app.get('/spicejet', function (req, res) {
 	});
 });
 
+app.get('/prototype', function (req, res) {
+  res.sendFile(path.join(__dirname + '/client/prototype.html'), function (err) {
+    if(err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
 function getWinners(dir, files_){
     files_ = files_ || [];
     var files = fs.readdirSync(dir);
